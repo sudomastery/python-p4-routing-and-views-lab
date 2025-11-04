@@ -4,11 +4,12 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-flask = "2.2.2"
-importlib-metadata = "6.0.0"
-importlib-resources = "5.10.0"
+flask = ">=3.0,<4"
 ipdb = "0.13.9"
 pytest = "7.2.0"
+# remove backports on Python 3.13:
+# importlib-metadata
+# importlib-resources
 
 [requires]
-python_full_version = "3.8.13"
+python_version = "3.13"
