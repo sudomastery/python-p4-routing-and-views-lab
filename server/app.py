@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from flask import Flask
+from flask import Flask, Response
 
 app = Flask(__name__)
 
@@ -11,14 +11,15 @@ def index():
 
 @app.route('/print/<string:parameter>')
 def print_parameter(parameter):
-    return f'<h1>The paramter is: {parameter}</h1>'
+    # Print to console and return the raw parameter text
+    print(parameter)
+    return parameter
 
 @app.route('/count/<int:number>')
 def count_number(number):    
-    output = ""
-    for printval in range(number):
-        output += f"The number is {printval}<br>\n"
-    return f"{output}"
+    # Return numbers from 0 to number-1, each on its own line
+    output = "\n".join(str(printval) for printval in range(number)) + "\n"
+    return Response(output, mimetype='text/plain')
 
         
 
@@ -30,12 +31,14 @@ def math(num1, operation, num2):
         result = num1 - num2
     elif operation == '*':
         result = num1 * num2
-    elif operation == '%':
+    elif operation == 'div':
         result = num1 / num2
+    elif operation == '%':
+        result = num1 % num2
     else:
-        return '<h1>Invalid operation</h1>'
-
-    return f'<h1>The result is: {result}</h1>'
+        return 'Invalid operation'
+    # Return plain text result
+    return str(result)
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
