@@ -7,7 +7,7 @@ app = Flask(__name__)
 #setup the basic routes
 @app.route('/')
 def index():
-    return '<h1>This is the default route</h1>'
+    return '<h1>Python Operations with Flask Routing and Views</h1>'
 
 @app.route('/print/<string:parameter>')
 def print_parameter(parameter):
